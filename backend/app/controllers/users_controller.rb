@@ -31,12 +31,13 @@ class UsersController < ApplicationController
         end
     end
   
-    # PUT /users/{username}
+    # PATCH /users/update
     def update
-        unless @user.update(user_params)
+        unless @current_user.update(user_params)
             render json: { errors: @user.errors.full_messages },
                 status: :unprocessable_entity
         end
+        render status: :ok
     end
   
     # DELETE /users/{username}

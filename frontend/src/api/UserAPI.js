@@ -1,4 +1,3 @@
-import axios from "axios";
 import CookieManager from "../utils/CookieManager";
 import { axiosAuthInstanceToAPI, axiosInstanceToAPI } from "../utils/APIUtils";
 
@@ -29,8 +28,19 @@ export default class UserAPI {
         })
     }
 
+    static update(username, email, password, passwordConf) {
+        axiosAuthInstanceToAPI.patch('/users/update', {
+            username, email, password, password_confirmation: passwordConf,
+        }).then(({ data }) => {
+            window.location.assign('/profile');
+        }, err => {
+            alert('error');
+            console.error(err);
+        })
+    }
+
     static async getUserDataFromJwtReq() {
-        const res = await axiosAuthInstanceToAPI.get('/user/profile');
+        const res = await axiosAuthInstanceToAPI.get('/users/me');
         return res?.data;
     }
 
