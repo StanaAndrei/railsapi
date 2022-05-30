@@ -8,7 +8,7 @@ import UserAPI from '../../api/UserAPI';
 
 function Header(props) {
     return (
-        <div>
+        <div style={{'backgroundColor': 'grey'}}>
             <Nav className="justify-content-end">
                 <Nav.Item>
                     <Nav.Link href="/">Home</Nav.Link>
