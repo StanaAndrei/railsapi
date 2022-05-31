@@ -30,7 +30,7 @@ function Users(props) {
             {
                 users.map(user => <UserBox
                     key={user.id}
-                    canDelete={currUserData.admin}
+                    canDelete={currUserData.admin && currUserData.id !== user.id}
                     user={user} />
                 )
             }
