@@ -19,7 +19,7 @@ function UserBox({ user, canDelete }) {
     return (
         <div>
             <hr />
-            <h6>{user.username}</h6>
+            <h6><a href={`/profile/${user.id}`}>{user.username}</a></h6>
             {
                 canDelete && 
                 <Button onClick={deleteUser} variant="danger">delete</Button>
