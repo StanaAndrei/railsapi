@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-import UserAPI from '../api/UserAPI';
+import UserAPI from '../../api/UserAPI';
 
 function Home(props) {
 
@@ -8,7 +8,7 @@ function Home(props) {
         <div>
             <h1 style={{ marginLeft: '1rem', textAlign: 'center' }}>Home</h1>
             <br /><br /><br />
-            <h4 style={{ textAlign: 'center', color: 'red' }}>Welcome to the app!</h4>
+            <h4 style={{ textAlign: 'center', color: 'red' }}>Welcome to the app!!!</h4>
             { !UserAPI.isLoggedIn() &&
                 <div style={{
                     display: 'flex',
