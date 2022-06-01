@@ -20,7 +20,7 @@ function App(props) {
                     <Routes>
                         <Route index element={<Home />} />
                         <Route path='/settings' element={auth ? <Settings /> : <Navigate replace to='/login' />} />
-                        <Route path='/profile' element={auth ? <Profile /> : <Navigate replace to='/login' />} />
+                        <Route path='/profile/:id' element={auth ? <Profile /> : <Navigate replace to='/login' />} />
                         <Route path='/users' element={auth ? <Users /> : <Navigate replace to='/login' />} />
 
                         {/**without auth */}

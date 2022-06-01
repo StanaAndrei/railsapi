@@ -23,7 +23,7 @@ function Header(props) {
                         <Nav.Item><Nav.Link href="/login">Login</Nav.Link></Nav.Item>) ||
                     <>
                         <Nav.Item>
-                            <Nav.Link href="/profile">Profile</Nav.Link>
+                            <Nav.Link href="/profile/me">Profile</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
                             <Nav.Link href="/settings">Settings</Nav.Link>

@@ -39,6 +39,11 @@ export default class UserAPI {
         })
     }
 
+    static async getUserData(id) {
+        const res = await axiosAuthInstanceToAPI.get(`/users/${id}`);
+        return res?.data;
+    }
+
     static async getUserDataFromJwtReq() {
         const res = await axiosAuthInstanceToAPI.get('/users/me');
         return res?.data;
