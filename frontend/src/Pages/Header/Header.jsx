@@ -5,6 +5,13 @@ import UserAPI from '../../api/UserAPI';
 
 
 function Header(props) {
+
+    const handleLogout = event => {
+        event.preventDefault();
+        CookieManager.deleteCookie('jwt');
+        window.location.assign('/');
+    }
+
     return (
         <div style={{ 'backgroundColor': 'grey' }}>
             <Nav className="justify-content-end">
@@ -21,6 +28,9 @@ function Header(props) {
                         <Nav.Item>
                             <Nav.Link href="/settings">Settings</Nav.Link>
                         </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link href="/users">Users</Nav.Link>
+                        </Nav.Item>
                     </>
                 }
                 <Nav.Item>
@@ -28,10 +38,7 @@ function Header(props) {
                 </Nav.Item>
                 <Nav.Item>
                     {
-                        UserAPI.isLoggedIn() && <Nav.Link onClick={() => {
-                            CookieManager.deleteCookie('jwt');
-                            window.location.assign('/');
-                        }}>logout</Nav.Link>
+                        UserAPI.isLoggedIn() && <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
                     }
                 </Nav.Item>
             </Nav>

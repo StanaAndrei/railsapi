@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from './Pages/Home';
 import Header from "./Pages/Header/Header"
 import Login from './Pages/Login/Login';
@@ -7,24 +7,32 @@ import Settings from './Pages/Settings/Settings';
 import Register from './Pages/Register/Register';
 import Profile from './Pages/Profile/Profile';
 import Users from './Pages/Users/Users';
+import UserAPI from './api/UserAPI';
 
 function App(props) {
+    const [auth] = React.useState(() => UserAPI.isLoggedIn());
+
     return (
         <div>
             <Header />
-            <BrowserRouter>
-                <Routes>
-                    <Route index element={<Home />} />
-                    <Route path='/login' element={<Login />} />
-                    <Route path='/settings' element={<Settings />} />
-                    <Route path='/profile' element={<Profile />} />
-                    <Route path='/register' element={<Register />} />
-                    <Route path='/users' element={<Users />} />
+            <div>
+                <BrowserRouter>
+                    <Routes>
+                        <Route index element={<Home />} />
+                        <Route path='/settings' element={auth ? <Settings /> : <Navigate replace to='/login' />} />
+                        <Route path='/profile' element={auth ? <Profile /> : <Navigate replace to='/login' />} />
+                        <Route path='/users' element={auth ? <Users /> : <Navigate replace to='/login' />} />
 
+                        {/**without auth */}
+                        <Route path='/login' element={<Login />} />
+                        <Route path='/register' element={<Register />} />
 
-                    <Route path="*" element={<null />} />
-                </Routes>
-            </BrowserRouter>
+                        <Route path="*" element={
+                            <h1 style={{ color: 'red' }}>ERROR 404! <br /> Page not found!</h1>
+                        } />
+                    </Routes>
+                </BrowserRouter>
+            </div>
         </div>
     );
 }

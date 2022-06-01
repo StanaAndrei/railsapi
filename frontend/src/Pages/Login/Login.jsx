@@ -22,7 +22,7 @@ function Login(props) {
     }
 
     return (
-        <div>
+        <div >
             <h1>LOGIN</h1>
             <form onSubmit={handleSubmit}>
                 <input type="email" placeholder='email' ref={emailRef} />
