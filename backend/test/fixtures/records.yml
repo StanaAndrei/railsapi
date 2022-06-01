@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  distance: 1
+  start_time: 2022-06-01 11:58:28
+  end_time: 2022-06-01 11:58:28
+  user: one
+
+two:
+  distance: 1
+  start_time: 2022-06-01 11:58:28
+  end_time: 2022-06-01 11:58:28
+  user: two

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
     before_action :authorize_request, except: %i[create]
-    before_action :find_user, only: %i[destroy]
+    before_action :find_user, only: %i[destroy show]
   
     # GET /users
     def index
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
     # GET /users/{id}
     def show
-        #render json: @current_user, status: :ok
+        render json: @user, status: :ok
     end
   
     # POST /users
@@ -45,11 +45,11 @@ class UsersController < ApplicationController
         @user.destroy!
         render status: :ok
     end
-  
+    
     private
   
         def find_user
-            return @user = User.find_by!(id: params[:id])
+            @user = User.find_by!(id: params[:id])
             rescue ActiveRecord::RecordNotFound
                 render json: { errors: 'User not found' }, status: :not_found
         end

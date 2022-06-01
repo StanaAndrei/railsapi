@@ -5,4 +5,7 @@ class User < ApplicationRecord
     validates :password, length: { minimum: 6 }, if: -> { new_record? || !password.nil? }
 
     before_save { self.email.downcase! }
+
+    has_many :records, dependent: :destroy
+
 end

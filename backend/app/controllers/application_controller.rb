@@ -4,6 +4,12 @@ class ApplicationController < ActionController::API
         render json: { error: 'not_found' }
     end
   
+    
+    def getParams
+        uri = URI.parse(request.url)
+        return CGI.parse(uri.query)
+    end
+
     def authorize_request
         header = request.headers['Authorization']
         header = header.split(' ').last if header
