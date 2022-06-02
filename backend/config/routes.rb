@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     get '/records/:uid', to: 'records#getRecsOfUser'
     post '/records', to: 'records#add'
     delete '/records/:id', to: 'records#destroy'
+    patch '/records/:id', to: 'records#update'
     
     #users
     get '/users/me', to: 'users#showMe'

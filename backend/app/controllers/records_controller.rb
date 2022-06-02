@@ -31,7 +31,18 @@ class RecordsController < ApplicationController
         end
 
         if @current_user.admin
-            User.find_by(id: getParams['target']).records.find_by(id: params[:id]).destroy!
+            Record.find_by(id: params[:id]).destroy!
+            render status: :ok
+        end
+    end
+
+    def update
+        record = Record.find_by(id: params[:id])
+        unless @current_user.admin or @current_user.id == record.user_id
+            render status: :unauthorized
+        end
+
+        if record&.update!(recordParams)
             render status: :ok
         end
     end

@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import RecordAPI from '../../api/RecordAPI';
 import DateTimeUtils from '../../utils/DateTimeUtils';
 
-function RecordBox({ record, canDelete, uid }) {
+function RecordBox({ record, haveRights, uid }) {
 
     const [deltaT] = React.useState(() => {
         const start = new Date(record.startTime), end = new Date(record.endTime);
@@ -24,16 +24,24 @@ function RecordBox({ record, canDelete, uid }) {
 
     return (
         <div style={{ borderColor: 'black', border: '1px', marginTop: '5px', backgroundColor: 'lightblue' }}>
-            <p><b>{ DateTimeUtils.formatDateRo(new Date(record.createdAt)) }</b></p>
+            <p><b>{DateTimeUtils.formatDateRo(new Date(record.createdAt))}</b></p>
             <p>distance: {record.distance}</p>
             <p>interval:{' '}
-                { DateTimeUtils.formatDateRo(new Date(record.startTime)) }{' '}
+                {DateTimeUtils.formatDateRo(new Date(record.startTime))}{' '}
                 <span style={{ fontSize: '29px', marginTop: '30px' }}>&#129046;	</span>
-                { DateTimeUtils.formatDateRo(new Date(record.endTime)) }
+                {DateTimeUtils.formatDateRo(new Date(record.endTime))}
             </p>
             <p>time: {deltaT} seconds</p>
             <p>average speed: {Number(record.distance) / deltaT} m/s</p>
-            { canDelete &&
+            {
+                haveRights &&
+                <Button
+                    variant="primary"
+                    onClick={() => window.location.assign(`/edit-record/${record.id}`)}>
+                    edit</Button>
+            }
+            <br />
+            {haveRights &&
                 <Button variant="danger" onClick={deleteRec}>delete</Button>
             }
         </div>

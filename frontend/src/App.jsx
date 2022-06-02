@@ -8,6 +8,7 @@ import Register from './Pages/Register/Register';
 import Profile from './Pages/Profile/Profile';
 import Users from './Pages/Users/Users';
 import UserAPI from './api/UserAPI';
+import EditRec from './Pages/EditRec/EditRec';
 
 function App(props) {
     const [auth] = React.useState(() => UserAPI.isLoggedIn());
@@ -22,6 +23,7 @@ function App(props) {
                         <Route path='/settings' element={auth ? <Settings /> : <Navigate replace to='/login' />} />
                         <Route path='/profile/:id' element={auth ? <Profile /> : <Navigate replace to='/login' />} />
                         <Route path='/users' element={auth ? <Users /> : <Navigate replace to='/login' />} />
+                        <Route path='/edit-record/:id' element={auth ? <EditRec /> : <Navigate replace to='/login' />} />
 
                         {/**without auth */}
                         <Route path='/login' element={<Login />} />

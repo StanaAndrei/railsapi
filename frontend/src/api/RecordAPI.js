@@ -10,4 +10,16 @@ export default class RecordAPI {
         const res = await (axiosAuthInstanceToAPI.delete(`/records/${id}?target=${target}`))
         return res.status;
     }
+
+    static async add({ distance, startTime, endTime }) {
+        await axiosAuthInstanceToAPI.post('/records', {
+            distance, start_time: startTime, end_time: endTime
+        });
+    }
+
+    static async update(id, { distance, startTime, endTime }) {
+        await axiosAuthInstanceToAPI.patch(`/records/${id}`, {
+            distance, start_time: startTime, end_time: endTime
+        });
+    }
 }

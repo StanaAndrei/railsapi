@@ -67,7 +67,7 @@ function Profile(props) {
             <h4>Records:</h4>
             {
                 filteredRecords.map(record => <RecordBox
-                    canDelete={authUserData.admin || id.toLowerCase() === 'me'}
+                    haveRights={authUserData.admin || id.toLowerCase() === 'me'}
                     key={record.id}
                     record={record}
                     uid={userData.id}
