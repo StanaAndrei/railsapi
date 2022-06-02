@@ -39,6 +39,18 @@ export default class UserAPI {
         })
     }
 
+    static delete(id) {
+        axiosAuthInstanceToAPI.delete(`/users/${id}`).then(res => {
+            if (res.status === 200) {
+                alert('user deleted!');
+                window.location.reload();
+            }
+        }, err => {
+            alert('error!');
+            console.error(err);
+        })
+    }
+
     static async getUserData(id) {
         const res = await axiosAuthInstanceToAPI.get(`/users/${id}`);
         return res?.data;

@@ -42,8 +42,10 @@ class UsersController < ApplicationController
   
     # DELETE /users/{username}
     def destroy
-        @user.destroy!
-        render status: :ok
+        if @current_user.manager or @current_user.admin or @current_user.id == @user.id
+            @user.destroy!
+            render status: :ok
+        end
     end
     
     private

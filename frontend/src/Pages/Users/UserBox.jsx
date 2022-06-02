@@ -1,19 +1,12 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-import { axiosAuthInstanceToAPI } from '../../utils/APIUtils';
+import UserAPI from '../../api/UserAPI';
 
 function UserBox({ user, canDelete }) {
 
-    const deleteUser = () => {
-        axiosAuthInstanceToAPI.delete(`/users/${user.id}`).then(res => {
-            if (res.status === 200) {
-                alert('user deleted!');
-                window.location.reload();
-            }
-        }, err => {
-            alert('error!');
-            console.error(err);
-        })
+    const deleteUser = event => {
+        event.preventDefault();
+        UserAPI.delete(user.id);
     }
 
     return (
