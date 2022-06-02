@@ -27,7 +27,7 @@ function EditRec(props) {
     return (
         <div>
 
-            <RecordForm action={'update!'} setRecord={setRecord} />
+            <RecordForm action={'edit!'} setRecord={setRecord} />
         </div>
     );
 }
