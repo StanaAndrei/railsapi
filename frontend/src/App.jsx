@@ -20,7 +20,7 @@ function App(props) {
                 <BrowserRouter>
                     <Routes>
                         <Route index element={<Home />} />
-                        <Route path='/settings' element={auth ? <Settings /> : <Navigate replace to='/login' />} />
+                        <Route path='/settings/:id' element={auth ? <Settings /> : <Navigate replace to='/login' />} />
                         <Route path='/profile/:id' element={auth ? <Profile /> : <Navigate replace to='/login' />} />
                         <Route path='/users' element={auth ? <Users /> : <Navigate replace to='/login' />} />
                         <Route path='/edit-record/:id' element={auth ? <EditRec /> : <Navigate replace to='/login' />} />

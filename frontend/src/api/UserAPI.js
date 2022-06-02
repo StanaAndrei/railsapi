@@ -28,14 +28,9 @@ export default class UserAPI {
         })
     }
 
-    static update(username, email, password, passwordConf) {
-        axiosAuthInstanceToAPI.patch('/users/update', {
+    static async update(id, { username, email, password, passwordConf }) {
+        await axiosAuthInstanceToAPI.patch(`/users/${id}`, {
             username, email, password, password_confirmation: passwordConf,
-        }).then(({ data }) => {
-            window.location.assign('/profile');
-        }, err => {
-            alert('error');
-            console.error(err);
         })
     }
 

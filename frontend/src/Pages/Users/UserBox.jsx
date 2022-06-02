@@ -2,7 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import UserAPI from '../../api/UserAPI';
 
-function UserBox({ user, canDelete }) {
+function UserBox({ user, haveRights }) {
 
     const deleteUser = event => {
         event.preventDefault();
@@ -14,8 +14,11 @@ function UserBox({ user, canDelete }) {
             <hr />
             <h6><a href={`/profile/${user.id}`}>{user.username}</a></h6>
             {
-                canDelete && 
-                <Button onClick={deleteUser} variant="danger">delete</Button>
+                haveRights &&
+                <span>
+                    <Button onClick={() => window.location.assign(`/settings/${user.id}`)} variant="primary">edit</Button> <br />
+                    <Button onClick={deleteUser} variant="danger">delete</Button>
+                </span>
             }
             <hr />
         </div>

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     #users
     get '/users/me', to: 'users#showMe'
     post '/users', to: 'users#create'
-    patch '/users/update', to: 'users#update'
+    patch '/users/:id', to: 'users#update'
     resources :users, only: [:destroy, :index, :show]
 
 

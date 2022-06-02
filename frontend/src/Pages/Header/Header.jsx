@@ -26,7 +26,7 @@ function Header(props) {
                             <Nav.Link href="/profile/me">Profile</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link href="/settings">Settings</Nav.Link>
+                            <Nav.Link href="/settings/me">Settings</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
                             <Nav.Link href="/users">Users</Nav.Link>

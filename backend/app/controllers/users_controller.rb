@@ -31,13 +31,22 @@ class UsersController < ApplicationController
         end
     end
   
-    # PATCH /users/update
+    # PATCH /users/:id
     def update
-        unless @current_user.update(user_params)
-            render json: { errors: @user.errors.full_messages },
-                status: :unprocessable_entity
+        if @current_user.id == params[:id].to_i
+            if @current_user.update(user_params)
+                render status: :ok
+                return
+            end
         end
-        render status: :ok
+
+        if @current_user.admin or @current_user.manager
+            user = User.find_by!(id: params[:id])
+            if user.update(user_params)
+                render status: :ok
+            end
+        end
+
     end
   
     # DELETE /users/{username}

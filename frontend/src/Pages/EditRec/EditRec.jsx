@@ -20,7 +20,7 @@ function EditRec(props) {
         }
 
         RecordAPI.update(id, record).then(() => {
-            window.location.assign('/profile/me');
+            window.location.reload();
         }).catch(() => alert('error!'))
     }, [record, id])
 
