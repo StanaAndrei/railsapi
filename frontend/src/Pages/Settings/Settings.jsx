@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router';
 import UserAPI from '../../api/UserAPI';
+import UserForm from '../../Components/UserForm';
 
 function Settings(props) {
     const [authUserData, setAuthUserData] = React.useState({});
@@ -31,38 +32,21 @@ function Settings(props) {
         })
     }, [uid])
 
-    const userNameRef = React.createRef();
-    const emailRef = React.createRef();
-    const passwordRef = React.createRef();
-    const passwordConfRef = React.createRef();
+    const [newParams, setNewParams] = React.useState(null);
 
-    const handleSubmit = event => {
-        event.preventDefault();
-
-        const { value: username } = userNameRef.current;
-        const { value: email } = emailRef.current;
-        const { value: password } = passwordRef.current;
-        const { value: passwordConf } = passwordConfRef.current;
-
-        UserAPI.update(uid, { username, email, password, passwordConf }).then(() => {
+    React.useEffect(() => {
+        if (newParams == null) {
+            return;
+        }
+        UserAPI.update(uid, newParams).then(() => {
             window.location.assign(`/profile/${uid}`);
         }).catch(() => alert('error!'))
-    }
+    }, [newParams, uid])
 
     return (
         <div>
             <h1>Settings</h1>
-            <form onSubmit={handleSubmit}>
-                <input type="text" defaultValue={userData.username} ref={userNameRef} />
-                <br />
-                <input type="email" defaultValue={userData.email} ref={emailRef} />
-                <br />
-                <input type="password" placeholder='password' ref={passwordRef} />
-                <br />
-                <input type="password" placeholder='confirm password' ref={passwordConfRef} />
-                <br />
-                <input type="submit" value={'update'} />
-            </form>
+            <UserForm setUser={setNewParams} action={'update'} userData={userData}/>
         </div>
     );
 }

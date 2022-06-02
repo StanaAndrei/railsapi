@@ -2,18 +2,11 @@ import CookieManager from "../utils/CookieManager";
 import { axiosAuthInstanceToAPI, axiosInstanceToAPI } from "../utils/APIUtils";
 
 export default class UserAPI {
-    static register(username, email, password, passwordConf) {
-        axiosInstanceToAPI.post('users', {
+    static async register({ username, email, password, passwordConf }) {
+        const { data } = await axiosInstanceToAPI.post('users', {
             username, email, password, password_confirmation: passwordConf,
-        }).then(({ data }) => {
-            CookieManager.setCookie('jwt', data.jwt);
-            window.location.assign('/');
-        }, err => {
-            console.error(err);
-        }).catch(err => {
-            console.warn(err);
-            alert('error!');
         })
+        return data;
     }
 
     static login(email, password) {

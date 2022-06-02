@@ -1,7 +1,10 @@
 import React from 'react';
 import UserAPI from '../../api/UserAPI';
+import UserForm from '../../Components/UserForm';
+import CookieManager from '../../utils/CookieManager';
 
 function Register(props) {
+    const [user, setUser] = React.useState(null);
 
     React.useEffect(() => {
         if (UserAPI.isLoggedIn()) {
@@ -9,36 +12,22 @@ function Register(props) {
         }
     }, [])
 
-    const userNameRef = React.createRef();
-    const emailRef = React.createRef();
-    const passwordRef = React.createRef();
-    const passwordConfRef = React.createRef();
-
-    const handleSubmit = event => {
-        event.preventDefault();
-
-        const { value: username } = userNameRef.current;
-        const { value: email } = emailRef.current;
-        const { value: password } = passwordRef.current;
-        const { value: passwordConf } = passwordConfRef.current;
-
-        UserAPI.register(username, email, password, passwordConf);
-    }
+    React.useEffect(() => {
+        if (user == null) {
+            return;
+        }
+        UserAPI.register(user).then(data => {
+            console.log(data);
+            CookieManager.setCookie('jwt', data.jwt);
+            window.location.assign('/');
+        }).catch(() => alert('error!'))
+    }, [user])
 
     return (
         <div>
             <h1>REGISTER</h1>
-            <form onSubmit={handleSubmit}>
-                <input type="text" placeholder='username' ref={userNameRef} />
-                <br />
-                <input type="email" placeholder='email' ref={emailRef} />
-                <br />
-                <input type="password" placeholder='password' ref={passwordRef} />
-                <br />
-                <input type="password" placeholder='confirm password' ref={passwordConfRef} />
-                <br />
-                <input type="submit" value={'register'} />
-            </form>
+            <br />
+            <UserForm action={'register'} setUser={setUser} />
         </div>
     );
 }
