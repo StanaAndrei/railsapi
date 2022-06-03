@@ -6,7 +6,9 @@ function UserBox({ user, haveRights }) {
 
     const deleteUser = event => {
         event.preventDefault();
-        UserAPI.delete(user.id);
+        UserAPI.delete(user.id).then(() => {
+            window.location.reload();
+        }).catch(() => alert('error!'));
     }
 
     return (

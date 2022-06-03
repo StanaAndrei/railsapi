@@ -22,16 +22,8 @@ export default class UserAPI {
         })
     }
 
-    static delete(id) {
-        axiosAuthInstanceToAPI.delete(`/users/${id}`).then(res => {
-            if (res.status === 200) {
-                alert('user deleted!');
-                window.location.reload();
-            }
-        }, err => {
-            alert('error!');
-            console.error(err);
-        })
+    static async delete(id) {
+        await axiosAuthInstanceToAPI.delete(`/users/${id}`);
     }
 
     static async getUserData(id) {
@@ -49,7 +41,7 @@ export default class UserAPI {
     }
 
     static async getAllUSers() {
-        const {data} = await axiosAuthInstanceToAPI.get('/users');
+        const { data } = await axiosAuthInstanceToAPI.get('/users');
         return data;
     }
 }
