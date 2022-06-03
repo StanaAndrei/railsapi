@@ -31,7 +31,7 @@ function RecordBox({ record, haveRights, uid }) {
                 <span style={{ fontSize: '29px', marginTop: '30px' }}>&#129046;	</span>
                 {DateTimeUtils.formatDateRo(new Date(record.endTime))}
             </p>
-            <p>time: {deltaT} seconds</p>
+            {/*<p>time: {deltaT} seconds</p>*/}
             <p>average speed: {Number(record.distance) / deltaT} m/s</p>
             {
                 haveRights &&

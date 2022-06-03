@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import RecordAPI from '../../api/RecordAPI';
 import RecordBox from './RecordBox';
 import Filter from './Filter';
+import Report from './Report';
 
 function Profile(props) {
     const [authUserData, setAuthUserData] = React.useState({});
@@ -63,6 +64,8 @@ function Profile(props) {
             <h1>Profile page</h1> <br />
             <h3>{userData.username}</h3>
             <hr />
+            <Report records={records} />
+            <br />
             <Filter setFilterInt={setFilterInt} />
             <h4>Records:</h4>
             {
