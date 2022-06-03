@@ -1,5 +1,6 @@
 import React from 'react';
 import UserAPI from '../../api/UserAPI';
+import CookieManager from '../../utils/CookieManager';
 
 function Login(props) {
     const emailRef = React.useRef();
@@ -18,7 +19,10 @@ function Login(props) {
         const { value: password } = passwordRef.current;
 
         //console.log(email, password);
-        UserAPI.login(email, password);
+        UserAPI.login(email, password).then(data => {
+            CookieManager.setCookie('jwt', data.jwt);
+            window.location.assign('/');
+        }).catch(() => alert('error!'));
     }
 
     return (

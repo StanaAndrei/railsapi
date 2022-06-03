@@ -9,16 +9,11 @@ export default class UserAPI {
         return data;
     }
 
-    static login(email, password) {
-        axiosInstanceToAPI.post('/auth/login', {
+    static async login(email, password) {
+        const { data } = await axiosInstanceToAPI.post('/auth/login', {
             email, password
-        }).then(({ data }) => {
-            CookieManager.setCookie('jwt', data.jwt);
-            window.location.assign('/');
-        }, err => {
-            alert('wrong login data');
-            console.error(err);
-        })
+        });
+        return data;
     }
 
     static async update(id, { username, email, password, passwordConf }) {
@@ -51,5 +46,10 @@ export default class UserAPI {
 
     static isLoggedIn() {
         return CookieManager.getCookie('jwt') != null;
+    }
+
+    static async getAllUSers() {
+        const {data} = await axiosAuthInstanceToAPI.get('/users');
+        return data;
     }
 }

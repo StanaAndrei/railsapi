@@ -1,6 +1,5 @@
 import React from 'react';
 import UserAPI from '../../api/UserAPI';
-import { axiosAuthInstanceToAPI } from '../../utils/APIUtils';
 import UserBox from './UserBox';
 
 function Users(props) {
@@ -8,12 +7,9 @@ function Users(props) {
     const [currUserData, setCurrUserData] = React.useState({});
 
     React.useEffect(() => {
-        axiosAuthInstanceToAPI.get('/users').then(({ data }) => {
+        UserAPI.getAllUSers().then(data => {
             setUsers(data);
-        }, err => {
-            alert('error!');
-            console.error(err);
-        })
+        }).catch(() => alert('error!'));
     }, [])
 
     React.useEffect(() => {
